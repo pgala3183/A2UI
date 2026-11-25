@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <!--VIEW_KIT-->
+</head>
+<body>
+  <div id="app"><p class="k-muted">Waiting for the tool result...</p></div>
+  <script>
+    // A static view: the layout is fixed here; only the data comes from the tool.
+    const { app, w } = viewKit;
+    const root = document.getElementById('app');
+    let station = null;
+
+    function render(data) {
+      station = data;
+      const fill = Math.round((100 * data.bikes) / data.capacity);
+      root.replaceChildren(w.card({ title: data.name, subtitle: `Status: ${data.status}` }, [
+        w.row({}, [
+          w.metric({ label: 'Bikes', value: data.bikes }),
+          w.metric({ label: 'Free docks', value: data.docks }),
+          w.metric({ label: 'Full', value: `${fill}%` }),
+        ]),
+        w.barChart({ title: 'Rides per hour', labels: data.hours, values: data.hourly }),
+        w.row({}, [
+          w.button({ label: 'Refresh' }, refresh),
+          w.button({ label: 'Ask the assistant why', variant: 'secondary' }, () => app.sendMessage(`Why is ${station.name} ${station.status}?`)),
+          w.button({ label: 'Open station page', variant: 'secondary' }, () => app.openLink(`https://example.org/stations/${station.id}`)),
+        ]),
+      ]));
+    }
+
+    async function refresh() {
+      // A view may call tools on its own server; the host proxies the call.
+      const result = await app.callServerTool('station_dashboard', { station_id: station.id });
+      render(result.structuredContent);
+      document.body.dataset.refreshed = String(Number(document.body.dataset.refreshed ?? 0) + 1);
+    }
+
+    app.on('ui/notifications/tool-input', ({ arguments: args }) => {
+      root.replaceChildren(viewKit.h('p', { class: 'k-muted' }, `Loading station ${args.station_id}...`));
+    });
+    app.on('ui/notifications/tool-result', (result) => render(result.structuredContent));
+    app.connect({ name: 'Station dashboard', version: '1.0.0' });
+  </script>
+</body>
+</html>

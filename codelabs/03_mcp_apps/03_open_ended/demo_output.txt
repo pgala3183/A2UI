@@ -1,0 +1,12 @@
+
+=== 1. The fixed shell and the generated widget ===
+  ui:// shell: 11533 chars (fetched once, cacheable)
+  generated widget: 2144 chars, 705 tokens (tiktoken o200k_base) in structuredContent
+  content for the host's model: 'Generated an interactive widget (2144 chars of HTML).'
+
+=== 2. In the host: two sandboxes deep, a booking, a message back to the chat ===
+  widget shows: $13.00
+  widget message: Booked RIDE-501: 30 min for $13.00 (server price).
+  host chat: [from the app] I booked RIDE-501 for $13.00. | Noted. Your ride is booked; the price came from the server, not from t
+  sandbox attributes: allow-scripts / allow-scripts
+  saved demo.png

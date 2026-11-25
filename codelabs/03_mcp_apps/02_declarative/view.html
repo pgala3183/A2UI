@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <!--VIEW_KIT-->
+</head>
+<body>
+  <div id="app"><p class="k-muted">Waiting for a spec...</p></div>
+  <script>
+    // A declarative view: it knows the catalog, not the dashboard.
+    const { app, renderSpec } = viewKit;
+    const root = document.getElementById('app');
+
+    function render(result) {
+      const spec = result.structuredContent?.spec;
+      if (!spec) return;
+      renderSpec(root, spec, { onAction: press });
+      const title = spec.elements[spec.root]?.props?.title;
+      // Tell the host's model what the user is looking at, without sending a message.
+      app.updateModelContext(`The dashboard shows: ${title}.`, { root: spec.root, elements: Object.keys(spec.elements).length });
+    }
+
+    async function press(action, params) {
+      root.style.opacity = 0.5;
+      const result = await app.callServerTool('dashboard_action', { action, params });
+      root.style.opacity = 1;
+      render(result);
+      document.body.dataset.actions = String(Number(document.body.dataset.actions ?? 0) + 1);
+    }
+
+    app.on('ui/notifications/tool-result', render);
+    app.connect({ name: 'Spec renderer', version: '1.0.0' });
+  </script>
+</body>
+</html>

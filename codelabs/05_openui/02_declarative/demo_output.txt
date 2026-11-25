@@ -1,0 +1,30 @@
+
+=== 1. The program, as it streams ===
+  root = Card("Network dashboard", [kpis, chart, table, actions])    missing now: kpis, chart, table, actions
+  kpis = Stack([bikes, rides, attention], "row")                     missing now: bikes, rides, attention, chart, table, actions
+  bikes = Metric("Bikes docked", "49 / 100")                         missing now: rides, attention, chart, table, actions
+  rides = Metric("Rides today", 634, "+6%")                          missing now: attention, chart, table, actions
+  attention = Metric("Need attention", 3)                            missing now: chart, table, actions
+  chart = BarChart("Bikes per station", names, counts)               missing now: names, counts, table, actions
+  names = ["Market St & 4th", "Ferry Building", "Caltrain Depot",    missing now: counts, table, actions
+  counts = [3, 21, 11, 0, 14]                                        missing now: table, actions
+  table = Table(["Station", "Bikes", "Free docks", "Status"], rows   missing now: rows, actions
+  rows = [["Market St & 4th", 3, 19, "empty soon"], ["Ferry Buildi   missing now: actions
+  actions = Stack([onlyAttention, showAll], "row")                   missing now: onlyAttention, showAll
+  onlyAttention = Button("Only stations needing attention", "filte   missing now: showAll
+  showAll = Button("Show all", "show_all", "secondary")              missing now: -
+
+=== 2. Size next to an element-map JSON spec of the same UI ===
+  OpenUI Lang         881 chars   282 tokens
+  json-render spec   1369 chars   454 tokens  (tiktoken o200k_base)
+
+=== 3. An action: only changed statements come back ===
+  root = Card("Stations needing attention", [kpis, chart, table, actions])
+  names = ["Market St & 4th", "Ferry Building", "Mission & 16th"]
+  counts = [3, 21, 0]
+  rows = [["Market St & 4th", 3, 19, "empty soon"], ["Ferry Building", 21, 2, "full soon"], ["Mission 
+
+=== 4. In the browser ===
+  saved demo_streaming.png
+  after the action: Stations needing attention | table rows: 3
+  saved demo.png

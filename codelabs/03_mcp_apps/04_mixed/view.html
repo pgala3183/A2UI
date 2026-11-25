@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <!--VIEW_KIT-->
+</head>
+<body>
+  <div id="app"><p class="k-muted">Waiting for the desk...</p></div>
+  <script>
+    // A mixed view. Each child of the spec's root gets its own slot:
+    //   catalog children are re-rendered from the spec on every update;
+    //   a GeneratedView child is mounted once in a nested sandbox and only receives data,
+    //   so the simulator keeps its state (moving an iframe would reload it).
+    const { app, renderSpec, mountGenerated, h } = viewKit;
+    const root = document.getElementById('app');
+    const slots = new Map();
+    const frames = new Map();
+    let last = null;
+
+    function render(result) {
+      const data = result.structuredContent;
+      if (!data?.spec) return;
+      last = data;
+      const { spec } = data;
+      if (!slots.size) root.replaceChildren();
+      for (const id of spec.elements[spec.root].children) {
+        if (!slots.has(id)) { slots.set(id, h('div', { 'data-slot': id })); root.append(slots.get(id)); }
+        const element = spec.elements[id];
+        if (element.type === 'GeneratedView') {
+          if (!frames.has(id)) {
+            slots.get(id).replaceChildren(h('div', { class: 'k-muted' }, 'GeneratedView - written by the server\'s model (nested sandbox)'), h('div'));
+            frames.set(id, mountGenerated(slots.get(id).lastChild, data.generated[element.props.artifact], { onAction: frameAction, height: element.props.height }));
+          }
+          frames.get(id).send({ stations: data.stations, message: data.message });
+        } else {
+          renderSpec(slots.get(id), { root: id, elements: spec.elements }, { onAction: catalogAction });
+        }
+      }
+      app.updateModelContext(data.message + ' ' + data.stations.map((s) => `${s.name} ${s.bikes}/${s.capacity}`).join('; '));
+    }
+
+    async function frameAction(name, payload) {
+      if (name !== 'rebalance') return;
+      const result = await app.callServerTool('rebalance', { source: payload.from, target: payload.to, count: payload.count });
+      if (result.isError) frames.forEach((f) => f.send({ stations: last.stations, message: `Not applied: ${result.content[0].text}` }));
+      else render(result);
+      document.body.dataset.moves = String(Number(document.body.dataset.moves ?? 0) + 1);
+    }
+
+    function catalogAction(action) {
+      if (action === 'ask_plan') app.sendMessage('Suggest a rebalancing plan for what the desk shows.');
+    }
+
+    app.on('ui/notifications/tool-result', render);
+    app.connect({ name: 'Rebalancing desk', version: '1.0.0' });
+  </script>
+</body>
+</html>

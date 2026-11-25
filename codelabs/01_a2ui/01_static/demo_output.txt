@@ -1,0 +1,23 @@
+
+=== 1. The model's whole job: one tool call ===
+  {"tool":"show_template","input":{"template":"station_status","station_id":"market"}}
+
+=== 2. The A2UI stream for that call ===
+  {"version":"v0.9","createSurface":{"surfaceId":"station_status:market","catalogId":"https://a2ui.org/specification/v0_9/basic_catalog.jso...
+  {"version":"v0.9","updateComponents":{"surfaceId":"station_status:market","components":[{"id":"root","component":"Card","child":"body"},{...
+  {"version":"v0.9","updateDataModel":{"surfaceId":"station_status:market","path":"/station","value":{"id":"market","name":"Market St & 4th...
+  {"version":"v0.9","updateDataModel":{"surfaceId":"station_status:market","path":"/station","value":{"id":"market","name":"Market St & 4th...
+  {"version":"v0.9","updateDataModel":{"surfaceId":"station_status:market","path":"/station","value":{"id":"market","name":"Market St & 4th...
+  {"version":"v0.9","updateDataModel":{"surfaceId":"station_status:market","path":"/station","value":{"id":"market","name":"Market St & 4th...
+  bytes by message type: {'createSurface': 147, 'updateComponents': 1794, 'updateDataModel': 1014}
+  the layout was sent once; every later message carried data only
+
+=== 3. A button action, answered by the application ===
+  {"version":"v0.9","updateDataModel":{"surfaceId":"station_status:market","path":"/station/bikes","value":4}}
+  {"version":"v0.9","updateDataModel":{"surfaceId":"station_status:market","path":"/station/updated","value":"Updated 00:02:35 (refreshed)"}}
+
+=== 4. In the browser ===
+  surface text: Market St & 4th |  | Status: balanced |  | Bikes available |  | 5 |  | Free docks |  | 17 |  | Rides today |  | 148 |  | Updated 00:02:39 |  | Refresh
+  after Refresh: Updated 00:02:39 (refreshed)
+  wire log entries: deleteSurface, createSurface, updateComponents, updateDataModel, updateDataModel, updateDataModel, updateDataModel, action: refresh, updateDataModel, updateDataModel
+  saved demo.png

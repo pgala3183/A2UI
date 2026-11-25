@@ -1,0 +1,23 @@
+
+=== 1. The prompt the library generates ===
+  Write OpenUI Lang: one statement per line, `id = Expression`. The first statement is `root = ...`.
+  Capitalised calls are components with positional arguments; lowercase names refer to other
+  statements and may refer forward. Literals are JSON. Components:
+  - StationCard(name: string, bikes: number, capacity: number, status?: string, hourly?: list) -
+  Everything about one station, with its hourly rides.
+  - AlertBanner(level: 'info'|'warning'|'critical', text: string) - One warning sentence.
+  - RideQuote(minutes: number, price: number) - The price of one ride.
+
+=== 2. The answer: one line ===
+  root = StationCard("Market St & 4th", 3, 22, "empty soon", [2, 10, 20, 14, 7, 6, 9, 8, 7, 9, 15, 21, 13])
+  resolved props: {"name": "Market St & 4th", "bikes": 3, "capacity": 22, "status": "empty soon", "hourly": [2, 10, 20, 14, 7, 6 ...
+
+=== 3. The same widget in other formats ===
+  OpenUI Lang                 105 chars   61 tokens
+  tool call (AG-UI static)    176 chars   86 tokens
+  json-render spec            204 chars   98 tokens
+  (tiktoken o200k_base)
+
+=== 4. In the browser ===
+  rendered: Market St & 4th | empty soon | Bikes | 3 | Free docks | 19 | Full | 14% | Rides per hour |
+  saved demo.png

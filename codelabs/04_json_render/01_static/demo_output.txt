@@ -1,0 +1,19 @@
+
+=== 1. Use 1 - the catalog as the prompt ===
+  Components (props; '?' = optional; bind any prop to state with {"$state": "/path"}):
+  - StationCard(name, bikes, capacity, status?, hours?, hourly?): Everything about one station, with
+  an hourly chart.
+  - AlertBanner(level, text): One warning sentence.
+  - RideQuote(minutes, ebike?, price): The price of one ride.
+  Actions (use in "on": {"press": {"action": name, "params": {...}}}):
+  - setState(statePath, value): Built in: set statePath to value, in the browser.
+
+=== 2. Use 2 - the catalog as the validator ===
+  {"note":{"attempt":1,"errors":["/elements/w/props/bikes: '3 bikes' is not of type 'integer'"]}}
+  {"note":{"attempt":2,"result":"valid"}}
+  patch replace '' -> one StationCard with props ['bikes', 'capacity', 'hourly', 'hours', 'name', 'status']
+
+=== 3. Use 3 - the catalog as the registry (browser) ===
+  rendered: Market St & 4th | empty soon | Bikes | 3 | Free docks | 19 | Full | 14% | Rides per hour | 2 | 6a | 
+  second prompt rendered: Ride quote | 30 min | $8.50
+  saved demo.png

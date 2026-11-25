@@ -1,0 +1,17 @@
+
+=== 1. Where the tokens go ===
+  12 statements, 1389 tokens (tiktoken o200k_base)
+  the simulator document alone: 1072 tokens (77%)
+  the other 11 statements: 317 tokens
+
+=== 2. An action answered with statements ===
+  bikes = Metric("Bikes docked", "49 / 100")
+  need = Metric("Need attention", 1)
+  attention = Text("Needs attention: Market St & 4th", "caption")
+  note = Markdown("Moved **6** bikes from Ferry Building to Mission & 16th.")
+  simData = {"stations": [{"id": "market", "name": "Market St & 4th", "bikes": 3, "capacity": 22}, {"i
+
+=== 3. In the browser ===
+  catalog part: Rebalancing desk | Bikes docked | 49 / 100 | Need attention | 1 |  | Needs attention: Market St & 4th
+  note: Moved 6 bikes from Ferry Building to Mission & 16th. | simulator kept its selection: ferry
+  saved demo.png

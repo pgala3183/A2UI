@@ -1,0 +1,39 @@
+
+=== 1. Terminal surface: python cli.py "Which stations need rebalancing?" ===
+Let me read the network first.
+  -> query_stations({})
+  <- {"stations": [{"name": "Market St & 4th", "bikes": 3, "capacity": 22, "status": "...
+  -> show_metric({"label": "Stations needing rebalancing", "value": 3, "delta": "of 5"})
++- Stations needing rebalancing -+
+| 3  of 5                        |
++--------------------------------+
+  <- displayed metric Stations needing rebalancing
+  -> show_metric({"label": "Bikes docked", "value": "49 / 100"})
++- Bikes docked -+
+| 49 / 100       |
++----------------+
+  <- displayed metric Bikes docked
+  -> show_chart({"title": "Bikes per station", "labels": ["Market St & 4th", "Ferry...)
+Bikes per station
+Market St & 4th    ###                      3
+Ferry Building     ######################## 21
+Caltrain Depot     #############            11
+Mission & 16th                              0
+SJSU Student Union ################         14
+  <- displayed chart Bikes per station
+  -> show_table({"columns": ["Station", "Bikes", "Capacity", "Status"], "rows": [["...)
++-------------------------------------------------+
+| Station         | Bikes | Capacity | Status     |
+|-----------------+-------+----------+------------|
+| Market St & 4th | 3     | 22       | empty soon |
+| Ferry Building  | 21    | 23       | full soon  |
+| Mission & 16th  | 0     | 15       | empty soon |
++-------------------------------------------------+
+  <- displayed a table with 3 rows
+Three stations need attention: Market St & 4th and Mission & 16th are nearly empty, Ferry Building is nearly full. Moving bikes from Ferry Building fixes most of it.
+  [done: end_turn]
+
+=== 2. Web surface: the same events in the browser ===
+  views on the page: v1, v2, v3, v4
+  final answer: Three stations need attention: Market St & 4th and Mission & 16th are nearly empty, Ferry Building i
+  saved demo.png

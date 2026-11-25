@@ -1,0 +1,28 @@
+
+=== 1. One run on the wire (RunAgentInput in, events out) ===
+  RUN_STARTED            {'threadId': 't1', 'runId': 'r1'}
+  TEXT_MESSAGE_START     {'messageId': 'msg_61d2cdabc3', 'role': 'assistant'}
+  TEXT_MESSAGE_CONTENT   {'messageId': 'msg_61d2cdabc3', 'delta': 'Checking Market St & 4th...'}
+  TEXT_MESSAGE_END       {'messageId': 'msg_61d2cdabc3'}
+  TOOL_CALL_START        {'toolCallId': 'toolu_abb8f662e011', 'toolCallName': 'get_station', 'parentMessageId': 'msg_61d2cdabc3'}
+  TOOL_CALL_ARGS x1 (the arguments, streamed as JSON fragments)
+  TOOL_CALL_END          {'toolCallId': 'toolu_abb8f662e011'}
+  TOOL_CALL_RESULT       {'messageId': 'msg_0105fdb9b7', 'toolCallId': 'toolu_abb8f662e011', 'role': 'tool', 'content': '{"name": "Mark
+  TEXT_MESSAGE_START     {'messageId': 'msg_01504b64c6', 'role': 'assistant'}
+  TEXT_MESSAGE_CONTENT   {'messageId': 'msg_01504b64c6', 'delta': 'Market St & 4th has 3 of 22 '}
+  TEXT_MESSAGE_CONTENT   {'messageId': 'msg_01504b64c6', 'delta': 'bikes.'}
+  TEXT_MESSAGE_END       {'messageId': 'msg_01504b64c6'}
+  TOOL_CALL_START        {'toolCallId': 'toolu_c2c9c3355dd1', 'toolCallName': 'show_station_card', 'parentMessageId': 'msg_01504b64c6'}
+  TOOL_CALL_ARGS x9 (the arguments, streamed as JSON fragments)
+  TOOL_CALL_END          {'toolCallId': 'toolu_c2c9c3355dd1'}
+  TOOL_CALL_START        {'toolCallId': 'toolu_7821a48eace9', 'toolCallName': 'show_alert', 'parentMessageId': 'msg_01504b64c6'}
+  TOOL_CALL_ARGS x4 (the arguments, streamed as JSON fragments)
+  TOOL_CALL_END          {'toolCallId': 'toolu_7821a48eace9'}
+  TOOL_CALL_RESULT       {'messageId': 'msg_c2fa59af7a', 'toolCallId': 'toolu_c2c9c3355dd1', 'role': 'tool', 'content': '{"rendered": "
+  TOOL_CALL_RESULT       {'messageId': 'msg_5c4e2eb0d8', 'toolCallId': 'toolu_7821a48eace9', 'role': 'tool', 'content': '{"rendered": "
+  RUN_FINISHED           {'threadId': 't1', 'runId': 'r1'}
+
+=== 2. In the browser: components drawn from tool calls ===
+  show_station_card: Market St & 4th | empty soon | Bikes | 3 | Free docks | 19 | Full | 14% | Rides per hour | 2 | 6a | 10 | 7a | 20 | 8a | 
+  show_alert: Market St & 4th is empty soon: plan a rebalancing run.
+  saved demo.png

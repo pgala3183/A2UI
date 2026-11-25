@@ -1,0 +1,44 @@
+
+=== 1. Terminal surface: python cli.py "Make me a rebalancing report" ===
+Reading the network.
+  -> query_stations({})
+  <- {"stations": [{"name": "Market St & 4th", "bikes": 3, "capacity": 22, "status": "...
+  -> render_ui({"view": "report", "spec": {"root": "dash", "elements": {"dash": {"...)
+  <- {"error": "invalid spec: /elements/dash/children: unknown child 'footer'; /elemen...
+I used a type that is not in the catalog; fixing it.
+  -> render_ui({"view": "report", "spec": {"root": "dash", "elements": {"dash": {"...)
++--------------------------------------- Rebalancing report ---------------------------------------+
+| +- Need attention -+  +- Rides today -+                                                          |
+| | 3  of 5          |  | 634           |                                                          |
+| +------------------+  +---------------+                                                          |
+| Bikes per station                                                                                |
+| Market St & 4th    ###                      3                                                    |
+| Ferry Building     ######################## 21                                                   |
+| Caltrain Depot     #############            11                                                   |
+| Mission & 16th                              0                                                    |
+| SJSU Student Union ################         14                                                   |
+| +--------------------------------------+                                                         |
+| | Station         | Bikes | Status     |                                                         |
+| |-----------------+-------+------------|                                                         |
+| | Market St & 4th | 3     | empty soon |                                                         |
+| | Ferry Building  | 21    | full soon  |                                                         |
+| | Mission & 16th  | 0     | empty soon |                                                         |
+| +--------------------------------------+                                                         |
++--------------------------------------------------------------------------------------------------+
+  <- rendered view report with 6 elements
+The report is on screen: three stations need attention.
+  [done: end_turn]
+
+=== 2. Web surface ===
+  transcript:
+    Reading the network.
+    -> query_stations({})
+    <- {"stations": [{"name": "Market St & 4th", "bikes": 3, "capacity": 22, "status": "empty soon"}, {"name"
+    -> render_ui({"view":"report","spec":{"root":"dash","elements":{"dash":{"type":"Card","props":{"title":"R
+    <- {"error": "invalid spec: /elements/dash/children: unknown child 'footer'; /elements/chart/type: unknow
+    I used a type that is not in the catalog; fixing it.
+    -> render_ui({"view":"report","spec":{"root":"dash","elements":{"dash":{"type":"Card","props":{"title":"R
+    <- rendered view report with 6 elements
+    The report is on screen: three stations need attention.
+  rendered: Rebalancing report
+  saved demo.png

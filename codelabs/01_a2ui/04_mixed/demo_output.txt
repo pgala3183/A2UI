@@ -1,0 +1,20 @@
+
+=== 1. What the model wrote: mostly catalog, one HtmlFrame ===
+  createSurface: genux.dev:bikes/mixed/v1
+  updateComponents: Card, Column, Text, Row, Column, Text, Text, Column, Text, Text, Column, Text, Text, Text, Divider
+  updateComponents: HtmlFrame
+  updateComponents: Text, Row, Text, Button
+  updateDataModel: /summary
+  updateDataModel: /stations
+  updateDataModel: /message
+  catalog components: 1642 chars; HtmlFrame: 3308 chars (66% of the layout for one interactive region)
+  tokens: layout 1963 total (tiktoken o200k_base)
+
+=== 2. In the browser: an action from inside the frame, then one from a catalog button ===
+  before: Needs attention: Market St & 4th, Ferry Building, Mission & 16th
+  catalog Text after the frame's action: Moved 8 bikes from Ferry Building to Mission & 16th.
+  catalog Text now: Needs attention: Market St & 4th
+  frame kept its selection: ferry -> mission
+  saved demo.png
+  after the catalog button: Numbers refreshed at 00:03:02 UTC.
+  wire: action: rebalance, updateDataModel, updateDataModel, updateDataModel, action: refresh, updateDataModel, updateDataModel, updateDataModel

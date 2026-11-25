@@ -1,0 +1,35 @@
+
+=== 1. The catalog becomes the system prompt ===
+  system prompt: 1440 chars, 350 tokens (tiktoken o200k_base)
+  Catalog https://a2ui.org/specification/v0_9/basic_catalog.json. Components (common props: id,
+  component, weight):
+  - Text(text, variant?): Text, plain or markdown heading ('# Title').
+  - Card(child): A bordered container with exactly one child.
+  - Column(children, justify?, align?): Children stacked vertically.
+  - Row(children, justify?, align?): Children side by side.
+  - Button(child, variant?, action): A button. 'child' is the id of a Text used as its label.
+  'action.event' is sent to the server.
+  - TextField(label, value?, variant?): A text input bound two-way to the data model through
+  'value': {'path': ...}.
+  - CheckBox(label, value): A checkbox bound two-way to a boolean in the data model.
+  - Divider(axis?): A horizontal rule.
+
+=== 2. The stream: validate each line, correct, retry ===
+  createSurface     
+  updateComponents  4 components
+  {"note":{"attempt":1,"errors":[{"code":"VALIDATION_FAILED","surfaceId":"report_form","path":"/updateComponents/components/4","message":"unknown component 'Dropdown'; this catalog has Text, Card, Co...
+  deleteSurface     
+  createSurface     
+  updateComponents  4 components
+  updateComponents  6 components
+  updateComponents  4 components
+  updateDataModel   /report
+  {"note":{"attempt":2,"result":"valid"}}
+
+=== 3. The form in a browser: type, check, click ===
+  saved demo_streaming.png
+  (mid-stream: ids that have not arrived yet render as skeletons)
+  data model after typing: {"report":{"station":"Market St & 4th","bike":"B-2231","issue":"Rear brake does not grip","urgent":true,"result":""}}
+  server answer: Ticket BK-4201 created. Marked unsafe: the bike is locked remotely.
+  button label now: Report another bike
+  saved demo.png

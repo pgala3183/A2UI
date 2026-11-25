@@ -1,0 +1,25 @@
+
+=== 1. The stream: progress events while the document line grows ===
+  pending  {'id': 'root', 'component': 'HtmlArtifact', 'chars': 28}
+  line     root = HtmlArtifact("Trip cost calculator", doc, prices)  (56 chars, 13 tokens)
+  pending  {'id': 'prices', 'component': None, 'chars': 27}
+  line     prices = {"pricing": {"unlock": 1.0, "per_minute": 0.25, "ebike_per_mi...  (107 chars, 44 tokens)
+  pending  {'id': 'doc', 'component': None, 'chars': 31}
+  pending  {'id': 'doc', 'component': None, 'chars': 451}
+  pending  {'id': 'doc', 'component': None, 'chars': 871}
+  pending  {'id': 'doc', 'component': None, 'chars': 1291}
+  pending  {'id': 'doc', 'component': None, 'chars': 1711}
+  pending  {'id': 'doc', 'component': None, 'chars': 2131}
+  line     doc = "<!doctype html>\n<html><head><style>\n  body{font:14px system-u...  (2274 chars, 780 tokens)
+  note     {'statements': 3, 'unresolved': []}
+
+=== 2. The policy runs on the document, whichever statement comes first ===
+   accepted
+   ['doc: network access is not allowed']
+
+=== 3. In the browser ===
+  while streaming: Trip cost calculator |  | generating... 31 characters so far
+  saved demo_streaming.png
+  frame after the new prices statement: Booked: 20 min for $9.00 (server price).
+  saved demo.png
+  raw tab shows the source: <!doctype html> <html><head><style>   body{font:14px system- ...

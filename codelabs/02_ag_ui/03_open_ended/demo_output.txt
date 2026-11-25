@@ -1,0 +1,21 @@
+
+=== 1. Events of the first run (content deltas collapsed) ===
+  RUN_STARTED          
+  TEXT_MESSAGE_START   
+  TEXT_MESSAGE_END     after 82 TEXT_MESSAGE_CONTENT events, 2269 chars (733 tokens)
+  CUSTOM               genui.html artifact=html_r1 html=2145 chars
+  CUSTOM               genui.data {"pricing": {"unlock": 1.0, "per_minute": 0.25, "ebike_per_minute": 0.
+  RUN_FINISHED         
+
+=== 2. A click inside the frame becomes a user message; a backend tool prices it ===
+  TOOL_CALL_START      {"toolCallId": "toolu_8afd80e5449e", "toolCallName": "quote_ride", "parentMessageId": "msg_d8527c9d2c"}
+  TOOL_CALL_RESULT     {"toolCallId": "toolu_8afd80e5449e", "role": "tool", "content": "{\"minutes\": 30, \"ebike\": false, \"member\
+  CUSTOM               {"name": "genui.data", "value": {"artifact": "html_r1", "data": {"pricing": {"unlock": 1.0, "per_minute": 0.25
+  TEXT_MESSAGE_CONTENT {"delta": "Booked RIDE-301: 30 minutes "}
+  TEXT_MESSAGE_CONTENT {"delta": "for $4.25."}
+
+=== 3. In the browser ===
+  frame: $4.25 for 30 min as a member
+  frame message: Booked RIDE-302: $4.25 (server price)
+  chat: Booked RIDE-302: 30 minutes for $4.25.
+  saved demo.png

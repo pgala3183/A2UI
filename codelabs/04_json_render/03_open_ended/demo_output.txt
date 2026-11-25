@@ -1,0 +1,19 @@
+
+=== 1. The stream: a document in chunks ===
+  add     /root                                "calc"
+  add     /elements/calc                       {"type": "HtmlArtifact", "props": {"title": "Trip cost c
+  add     /elements/calc/props/chunks/-        "<!doctype html>\n<html><head><style>\n  body{font:14px 
+  ...     (10 more chunk patches)              ""
+  replace /elements/calc/props/complete        true
+  add     /state/pricing                       {"unlock": 1.0, "per_minute": 0.25, "ebike_per_minute": 
+  11 chunks, 2144 characters of HTML
+
+=== 2. The gate: a document that fails the policy never completes ===
+  /root                        -> accepted
+  /elements/x                  -> accepted
+  /elements/x/props/complete   -> ['/elements/x: network access (fetch) is not allowed']
+
+=== 3. In the browser ===
+  saved demo_streaming.png
+  frame message (from a /state patch): Booked: 45 min for $12.25 (server price).
+  saved demo.png

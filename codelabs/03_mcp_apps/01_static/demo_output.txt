@@ -1,0 +1,19 @@
+
+=== 1. What any MCP host sees ===
+  initialize -> server bikes-static, protocol 2025-06-18, session a260d7a5...
+  tools/list -> station_dashboard  _meta: {"ui": {"resourceUri": "ui://bikes/station-dashboard.html"}}
+  resources/read -> text/html;profile=mcp-app, 11904 chars, _meta: {"ui": {"csp": {"connectDomains": [], "resourceDomains": []}, "prefersBorder": true}}
+  tools/call -> content: 'Market St & 4th: 3/22 bikes (empty soon).'
+               structuredContent keys: ['bikes', 'capacity', 'docks', 'ebikes', 'hourly', 'hours', 'id', 'name', 'rides_today', 'status']
+
+=== 2. The demo host: model -> tool call -> view -> bridge ===
+  view title: Market St & 4th
+  chat:
+    Connected over MCP. Tools: station_dashboard (has UI)
+    Show me the Market St station
+    Opening the Market St & 4th dashboard.
+    [from the app] Why is Market St & 4th empty soon?
+    Commuters empty it in the 8 am peak and few bikes come back before 5 pm. A van run before 7 am fixes it.
+    The app asked to open https://example.org/stations/market. This host shows links; it never navigates for an ap
+  bridge traffic: mcp initialize, mcp tools/list, mcp resources/read, mcp tools/call, bridge ui/initialize, bridge ui/notifications/initialized, bridge ui/notifications/tool-input, bridge ui/notifications/tool-result, bridge tools/call, bridge ui/message, bridge ui/open-link
+  saved demo.png

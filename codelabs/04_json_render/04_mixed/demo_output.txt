@@ -1,0 +1,16 @@
+
+=== 1. In the browser: setState (local) and rebalance (server) ===
+  table visible before toggle: False
+  table visible after toggle: True | requests caused by setState: 0
+  patches from the action: replace /state/summary/names, replace /state/stations, replace /state/rows, replace /state/message
+  catalog metric: Need attention: 1 | frame: Moved 6 bikes from Ferry Building to Mission & 16th.
+  saved demo.png
+
+=== 2. The same spec in the terminal renderer (GET /text) ===
++-- Rebalancing desk --------------------------------------------------
+    Bikes docked: 49 / 100
+    Need attention: 1
+  Needs attention: Market St & 4th
+  [interactive: Rebalancing simulator - 3052 chars of HTML; open the web view to use it]
+  [ Show / hide station table ]  -> setState
+  (Table table hidden)

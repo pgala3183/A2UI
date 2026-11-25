@@ -1,0 +1,11 @@
+# Offline codelabs (tests and recorded demos)
+jsonschema>=4.17
+pytest>=8
+rich>=13
+mcp>=1.22,<2          # theme 03 (MCP Apps). mcp 2.x renamed FastMCP; these codelabs use the 1.x API
+uvicorn>=0.30          # serves the MCP Apps codelabs
+# Optional
+playwright>=1.45       # headless screenshots in demo.py (then: python -m playwright install chromium)
+tiktoken>=0.7          # token counts (o200k_base); falls back to chars/4 when missing
+ag-ui-protocol>=0.1    # theme 02 conformance tests against the official AG-UI models (skipped if missing)
+anthropic>=0.100       # only for live runs: GENUI_LIVE=1 with ANTHROPIC_API_KEY set

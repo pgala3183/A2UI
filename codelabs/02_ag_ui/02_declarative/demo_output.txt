@@ -1,0 +1,33 @@
+
+=== 1. First run: the UI is built in state, one element per delta ===
+  STATE_SNAPSHOT  {"ui": {"root": null, "elements": {}}}
+  STEP_STARTED    write_ui
+  STATE_DELTA     replace /ui/root                             "dash"
+  STATE_DELTA     add     /ui/elements/dash                    {"type": "Card", "props": {"title": "Network d
+  STATE_DELTA     add     /ui/elements/kpis                    {"type": "Row", "props": {}, "children": ["m_b
+  STATE_DELTA     add     /ui/elements/m_bikes                 {"type": "Metric", "props": {"label": "Bikes d
+  STATE_DELTA     add     /ui/elements/m_rides                 {"type": "Metric", "props": {"label": "Rides t
+  STATE_DELTA     add     /ui/elements/m_attention             {"type": "Metric", "props": {"label": "Need at
+  STATE_DELTA     add     /ui/elements/chart                   {"type": "BarChart", "props": {"title": "Bikes
+  STATE_DELTA     add     /ui/elements/table                   {"type": "Table", "props": {"columns": ["Stati
+  STATE_DELTA     add     /ui/elements/actions                 {"type": "Row", "props": {}, "children": ["onl
+  STATE_DELTA     add     /ui/elements/only_attention          {"type": "Button", "props": {"label": "Only st
+  STATE_DELTA     add     /ui/elements/show_all                {"type": "Button", "props": {"label": "Show al
+  STEP_FINISHED   write_ui
+  RUN_FINISHED    {'elements': 10, 'rejected': 0}
+
+=== 2. Second run: a button click sends the state back; only changes are patched ===
+  STEP_STARTED    write_ui
+  STATE_DELTA     replace /ui/elements/dash/props/title        "Stations needing attention"
+  STATE_DELTA     replace /ui/elements/dash/props/subtitle     "3 stations"
+  STATE_DELTA     replace /ui/elements/chart/props/labels      ["Market St & 4th", "Ferry Building", "Mission
+  STATE_DELTA     replace /ui/elements/chart/props/values      [3, 21, 0]
+  STATE_DELTA     replace /ui/elements/table/props/rows        [["Market St & 4th", 3, 19, "empty soon"], ["F
+  STEP_FINISHED   write_ui
+  RUN_FINISHED    {'elements': 3, 'rejected': 0}
+  state bytes on the wire: first run 2573, second run 776
+
+=== 3. In the browser ===
+  title: Network dashboard | table rows: 5
+  after the click: Stations needing attention | table rows: 3
+  saved demo.png

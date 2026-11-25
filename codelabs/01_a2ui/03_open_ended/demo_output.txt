@@ -1,0 +1,18 @@
+
+=== 1. What the model sent ===
+  {"version":"v0.9","createSurface":{"surfaceId":"trip_calculator","catalogId":"genux.dev:bikes/open-ended/v1"}}
+  updateComponents: 1 component, HtmlFrame with 2144 chars of HTML (705 tokens, tiktoken o200k_base)
+  content policy violations: none
+  {"version":"v0.9","updateDataModel":{"surfaceId":"trip_calculator","path":"/pricing","value":{"unlock":1.0,"per_minute":0.25,"ebike_per_minute":0.1...
+  {"version":"v0.9","updateDataModel":{"surfaceId":"trip_calculator","path":"/pricing/per_minute","value":0.3}}
+  {"version":"v0.9","updateDataModel":{"surfaceId":"trip_calculator","path":"/message","value":"Peak pricing is on: $0.30 per minute."}}
+
+=== 2. The policy rejects what a sandbox should never see ===
+   ['external <script src> is not allowed', 'network access (fetch) is not allowed', 'external URLs are not allowed']
+
+=== 3. In the browser: server price change, then a booking from inside the iframe ===
+  frame after updateDataModel: $1.00 unlock + $0.30/min | Peak pricing is on: $0.30 per minute.
+  frame shows: $19.00 for 40 min on an e-bike
+  server answer, shown inside the frame: Booked: 40 min e-bike ride for $19.00.
+  iframe sandbox attribute: 'allow-scripts' (no allow-same-origin)
+  saved demo.png

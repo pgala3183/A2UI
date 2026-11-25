@@ -1,0 +1,38 @@
+
+=== 1. Terminal: python cli.py "Make me an interactive trip-cost calculator" --no ===
+I will build an interactive calculator.
+  -> render_html({"view": "calc", "title": "Trip cost calculator", "html": "<!doctyp...)
++--------------------------------------- permission needed ----------------------------------------+
+| render_html {"view": "calc", "title": "Trip cost calculator", "html": "<!doctype                 |
+| html>\n<html><head><style>\n  body{font:14px                                                     |
+| system-ui,sans-serif;margin:0;padding:14px;color:#1d2433;background:#f7fafc}\n  h2{margin:0 0    |
+| 10px;font-size:17px}.row{disp...                                                                 |
++--------------------------------------------------------------------------------------------------+
+  <- {"error": "the user denied this action"}
+Understood, I will not show it.
+  [done: end_turn]
+
+=== 2. Terminal: the same with --yes ===
+I will build an interactive calculator.
+  -> render_html({"view": "calc", "title": "Trip cost calculator", "html": "<!doctyp...)
++--------------------------------------- permission needed ----------------------------------------+
+| render_html {"view": "calc", "title": "Trip cost calculator", "html": "<!doctype                 |
+| html>\n<html><head><style>\n  body{font:14px                                                     |
+| system-ui,sans-serif;margin:0;padding:14px;color:#1d2433;background:#f7fafc}\n  h2{margin:0 0    |
+| 10px;font-size:17px}.row{disp...                                                                 |
++--------------------------------------------------------------------------------------------------+
++------------------------------------------- view calc --------------------------------------------+
+| Trip cost calculator: interactive HTML, 2144 chars.                                              |
+| Terminal fallback: open /artifacts/calc.html on the web surface.                                 |
++--------------------------------------------------------------------------------------------------+
+  <- rendered Trip cost calculator as view calc (terminal users: /artifacts/calc.html)
+The calculator is on the web surface. Book a ride from it when you are ready.
+  [done: end_turn]
+
+=== 3. Web surface: approve, use the artifact, a declared and an undeclared action ===
+  paused: Permission needed |  | render_html {"view":"calc","title":"Trip cost calculator","html":"<!doctype html>\n<html><head><s
+  saved demo_permission.png
+  frame after send_to_view: Booked: 40 min for $11.00 (server price).
+  saved demo.png
+  GET /artifacts/calc.html CSP header: sandbox allow-scripts; default-src 'none'; script-src 'unsaf ...
+  undeclared action: {'type': 'error', 'message': "action 'delete_account' was not declared by view 'calc'"}

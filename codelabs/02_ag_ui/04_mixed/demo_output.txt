@@ -1,0 +1,11 @@
+
+=== In the browser: build, act inside the frame, confirm, see state update ===
+  run 1 events: RunAgentInput, RUN_STARTED, STATE_SNAPSHOT, TEXT_MESSAGE_START, TEXT_MESSAGE_CONTENT, TEXT_MESSAGE_END, STATE_DELTA, CUSTOM, TOOL_CALL_START, TOOL_CALL_ARGS, TOOL_CALL_END, TOOL_CALL_RESULT, RUN_FINISHED
+  alert (render tool): Needs attention: Market St & 4th, Ferry Building, Mission & 16th.
+  metric: Stations needing attention 3
+  run 2 ended with a frontend tool call: confirm_rebalance (frontend tool) |  | Move 8 bikes from Ferry Building to Mission & 16th? |  | Confirm | Cancel
+  saved demo_confirm.png
+  run 3 reply: Done: moved 8 bikes from Ferry Building to Mission & 16th.
+  metric now: Stations needing attention 1
+  frame kept running; it shows: Market St & 4th 3/22 Ferry Building 13/23 Caltrain Depot 11/22 Mission & 16th 8/15 SJSU Student Union 14/18
+  saved demo.png

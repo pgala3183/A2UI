@@ -1,0 +1,12 @@
+
+=== 1. tools/list and one tools/call ===
+  render_dashboard   _meta={"ui": {"resourceUri": "ui://bikes/spec-renderer.html"}}
+  dashboard_action   _meta={"ui": {"visibility": ["app"]}}
+  content (for the host's model): 'Dashboard generated. Showing: Network dashboard.'
+  structuredContent.spec: root=dash, 10 elements, types=['BarChart', 'Button', 'Card', 'Metric', 'Row', 'Table']
+
+=== 2. In the host: the view draws the spec, a button calls an app-only tool ===
+  view: Network dashboard | rows: 5
+  after the button: Stations needing attention | rows: 3
+  model context recorded by the host: [{"type":"text","text":"The dashboard shows: Stations needing attention."}]
+  saved demo.png
